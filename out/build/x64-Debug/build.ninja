@@ -63,28 +63,28 @@ build CMakeFiles\MPC_PID_simulator.dir\simulation.cpp.obj: CXX_COMPILER__MPC_PID
   TARGET_COMPILE_PDB = CMakeFiles\MPC_PID_simulator.dir\
   TARGET_PDB = MPC_PID_simulator.pdb
 
-build CMakeFiles\MPC_PID_simulator.dir\thermal_system.cpp.obj: CXX_COMPILER__MPC_PID_simulator_unscanned_Debug D$:\github\MPC-PID-simulator\thermal_system.cpp || cmake_object_order_depends_target_MPC_PID_simulator
+build CMakeFiles\MPC_PID_simulator.dir\PIDController.cpp.obj: CXX_COMPILER__MPC_PID_simulator_unscanned_Debug D$:\github\MPC-PID-simulator\PIDController.cpp || cmake_object_order_depends_target_MPC_PID_simulator
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++latest
   OBJECT_DIR = CMakeFiles\MPC_PID_simulator.dir
   OBJECT_FILE_DIR = CMakeFiles\MPC_PID_simulator.dir
   TARGET_COMPILE_PDB = CMakeFiles\MPC_PID_simulator.dir\
   TARGET_PDB = MPC_PID_simulator.pdb
 
-build CMakeFiles\MPC_PID_simulator.dir\pid_controller.cpp.obj: CXX_COMPILER__MPC_PID_simulator_unscanned_Debug D$:\github\MPC-PID-simulator\pid_controller.cpp || cmake_object_order_depends_target_MPC_PID_simulator
+build CMakeFiles\MPC_PID_simulator.dir\MPCController.cpp.obj: CXX_COMPILER__MPC_PID_simulator_unscanned_Debug D$:\github\MPC-PID-simulator\MPCController.cpp || cmake_object_order_depends_target_MPC_PID_simulator
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++latest
   OBJECT_DIR = CMakeFiles\MPC_PID_simulator.dir
   OBJECT_FILE_DIR = CMakeFiles\MPC_PID_simulator.dir
   TARGET_COMPILE_PDB = CMakeFiles\MPC_PID_simulator.dir\
   TARGET_PDB = MPC_PID_simulator.pdb
 
-build CMakeFiles\MPC_PID_simulator.dir\mpc_controller.cpp.obj: CXX_COMPILER__MPC_PID_simulator_unscanned_Debug D$:\github\MPC-PID-simulator\mpc_controller.cpp || cmake_object_order_depends_target_MPC_PID_simulator
+build CMakeFiles\MPC_PID_simulator.dir\HybridController.cpp.obj: CXX_COMPILER__MPC_PID_simulator_unscanned_Debug D$:\github\MPC-PID-simulator\HybridController.cpp || cmake_object_order_depends_target_MPC_PID_simulator
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++latest
   OBJECT_DIR = CMakeFiles\MPC_PID_simulator.dir
   OBJECT_FILE_DIR = CMakeFiles\MPC_PID_simulator.dir
   TARGET_COMPILE_PDB = CMakeFiles\MPC_PID_simulator.dir\
   TARGET_PDB = MPC_PID_simulator.pdb
 
-build CMakeFiles\MPC_PID_simulator.dir\hybrid_controller.cpp.obj: CXX_COMPILER__MPC_PID_simulator_unscanned_Debug D$:\github\MPC-PID-simulator\hybrid_controller.cpp || cmake_object_order_depends_target_MPC_PID_simulator
+build CMakeFiles\MPC_PID_simulator.dir\ThermalSystem.cpp.obj: CXX_COMPILER__MPC_PID_simulator_unscanned_Debug D$:\github\MPC-PID-simulator\ThermalSystem.cpp || cmake_object_order_depends_target_MPC_PID_simulator
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++latest
   OBJECT_DIR = CMakeFiles\MPC_PID_simulator.dir
   OBJECT_FILE_DIR = CMakeFiles\MPC_PID_simulator.dir
@@ -99,7 +99,7 @@ build CMakeFiles\MPC_PID_simulator.dir\hybrid_controller.cpp.obj: CXX_COMPILER__
 #############################################
 # Link the executable MPC_PID_simulator.exe
 
-build MPC_PID_simulator.exe: CXX_EXECUTABLE_LINKER__MPC_PID_simulator_Debug CMakeFiles\MPC_PID_simulator.dir\main.cpp.obj CMakeFiles\MPC_PID_simulator.dir\simulation.cpp.obj CMakeFiles\MPC_PID_simulator.dir\thermal_system.cpp.obj CMakeFiles\MPC_PID_simulator.dir\pid_controller.cpp.obj CMakeFiles\MPC_PID_simulator.dir\mpc_controller.cpp.obj CMakeFiles\MPC_PID_simulator.dir\hybrid_controller.cpp.obj
+build MPC_PID_simulator.exe: CXX_EXECUTABLE_LINKER__MPC_PID_simulator_Debug CMakeFiles\MPC_PID_simulator.dir\main.cpp.obj CMakeFiles\MPC_PID_simulator.dir\simulation.cpp.obj CMakeFiles\MPC_PID_simulator.dir\PIDController.cpp.obj CMakeFiles\MPC_PID_simulator.dir\MPCController.cpp.obj CMakeFiles\MPC_PID_simulator.dir\HybridController.cpp.obj CMakeFiles\MPC_PID_simulator.dir\ThermalSystem.cpp.obj
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib

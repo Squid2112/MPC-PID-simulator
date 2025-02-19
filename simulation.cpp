@@ -1,69 +1,72 @@
-#include <iomanip>
-#include "simulation.h"
+#include "Simulation.h"
 #include <iostream>
+#include <iomanip>
+#include <fstream>
 #include <cmath>
-#include <numbers>
 
-Simulation::Simulation(double initial_T)
-	: thermal_system(initial_T),
-	  pid_controller(),
-	  mpc_controller(),
-	  hybrid_controller(pid_controller, mpc_controller) {
-	double initial_error = T_setpoint - initial_T;
-	pid_controller.set_initial_error(initial_error);
-}
-
-double Simulation::T_amb(double t) const {
-	return T_avg + A * sin(2.0 * PI * t / P);
+// Constructor definition matching the declaration in Simulation.h.
+Simulation::Simulation(IController* controller, ISystemModel* model, double simulationTime, double dt)
+    : controller_(controller), model_(model), simulationTime_(simulationTime), dt_(dt)
+{
+    // You can add additional initialization code here if needed.
 }
 
 void Simulation::run() {
-	double current_time = 0.0;
-	thermal_system = ThermalSystem(thermal_system.get_current_T()); // Reset to initial
+    double currentTime = 0.0;
+    const double setpoint = 25.0; // Desired temperature in °C
+    double totalError = 0.0;
+    double maxError = 0.0;
+    int count = 0;
 
-	for (int step = 0; step < num_steps; ++step) {
-		double current_T = thermal_system.get_current_T();
-		times.push_back(current_time);
-		temperatures.push_back(current_T);
-		ambient_temps.push_back(T_amb(current_time));
+    // Open an output file for CSV logging.
+    std::ofstream outFile("simulation_output.csv");
+    if (!outFile.is_open()) {
+        std::cerr << "Error opening output file.\n";
+        return;
+    }
 
-		// Compute future T_amb for MPC (next N steps)
-		std::vector<double> future_T_amb;
-		for (int i = 0; i < N; ++i) {
-			double future_time = current_time + i * dt;
-			future_T_amb.push_back(T_amb(future_time));
-		}
+    // Print headers to console.
+    std::cout << std::setw(12) << "Time (s)"
+        << std::setw(20) << "Temp (°C)"
+        << std::setw(12) << "Error"
+        << std::setw(20) << "Control Input" << std::endl;
+    std::cout << std::string(64, '-') << std::endl;
 
-		// Compute control input
-		double u = hybrid_controller.compute_u(current_T, future_T_amb);
-		control_inputs.push_back(u);
+    // Write CSV header.
+    outFile << "Time (s),Temp (°C),Error,Control Input\n";
 
-		// Update temperature
-		double current_T_amb = T_amb(current_time);
-		thermal_system.update(u, current_T_amb);
+    // Simulation loop.
+    while (currentTime < simulationTime_) {
+        double currentTemp = model_->getOutput();
+        double error = setpoint - currentTemp;
+        double controlInput = controller_->computeControlInput(error, dt_);
+        model_->update(controlInput, dt_);
 
-		current_time += dt;
-	}
-}
+        // Print simulation data in columns.
+        std::cout << std::setw(12) << currentTime
+            << std::setw(20) << std::fixed << std::setprecision(4) << currentTemp
+            << std::setw(12) << error
+            << std::setw(20) << controlInput << std::endl;
 
-void Simulation::print_results() const {
-	// Headers, right-justified
-	std::cout << std::right << std::setw(10) << "Time" << " | "
-			  << std::right << std::setw(16) << "Temperature (°C)" << " | "
-			  << std::right << std::setw(16) << "Ambient Temp (°C)" << " | "
-			  << std::right << std::setw(16) << "Control Input (°C/s)" << std::endl;
+        // Write data to CSV.
+        outFile << currentTime << ","
+            << std::fixed << std::setprecision(4) << currentTemp << ","
+            << error << ","
+            << controlInput << "\n";
 
-	// Separator
-	std::cout << std::string(10, '-') << " | "
-			  << std::string(16, '-') << " | "
-			  << std::string(16, '-') << " | "
-			  << std::string(16, '-') << std::endl;
+        // Update summary statistics.
+        totalError += std::abs(error);
+        if (std::abs(error) > maxError)
+            maxError = std::abs(error);
+        count++;
 
-	// Data, right-justified with appropriate formats
-	for (size_t i = 0; i < times.size(); ++i) {
-		std::cout << std::right << std::setw(10) << static_cast<int>(times[i]) << " | "
-				  << std::right << std::setw(16) << std::fixed << std::setprecision(4) << temperatures[i] << " | "
-				  << std::right << std::setw(16) << std::fixed << std::setprecision(4) << ambient_temps[i] << " | "
-				  << std::right << std::setw(16) << std::scientific << std::setprecision(5) << control_inputs[i] << std::endl;
-	}
+        currentTime += dt_;
+    }
+    outFile.close();
+
+    // Compute and output summary statistics.
+    double avgError = (count > 0) ? totalError / count : 0.0;
+    std::cout << "\nSimulation Summary:\n";
+    std::cout << "Average Absolute Error: " << avgError << "\n";
+    std::cout << "Maximum Absolute Error: " << maxError << "\n";
 }
