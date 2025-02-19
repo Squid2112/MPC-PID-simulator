@@ -1,4 +1,4 @@
-# Install script for directory: D:/github/MPC-PID_simulator
+# Install script for directory: D:/github/MPC-PID-simulator
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -52,6 +52,6 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-  file(WRITE "D:/github/MPC-PID_simulator/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "D:/github/MPC-PID-simulator/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

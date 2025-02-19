@@ -1,3 +1,3 @@
-D:/github/MPC-PID_simulator/cmake-build-debug/CMakeFiles/MPC_PID_simulator.dir
-D:/github/MPC-PID_simulator/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/github/MPC-PID_simulator/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+D:/github/MPC-PID-simulator/cmake-build-debug/CMakeFiles/MPC_PID_simulator.dir
+D:/github/MPC-PID-simulator/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/github/MPC-PID-simulator/cmake-build-debug/CMakeFiles/rebuild_cache.dir
